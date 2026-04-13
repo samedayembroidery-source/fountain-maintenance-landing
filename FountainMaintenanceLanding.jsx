@@ -146,6 +146,9 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [activeQ, setActiveQ] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -194,6 +197,28 @@ export default function App() {
     { icon: "📋", t: "Condition Report", d: "Detailed findings write-up" },
     { icon: "✅", t: "Plan Recommendation", d: "Custom plan for your fountain" },
   ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("https://formspree.io/f/xojyabvd", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", phone: "" });
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch {
+      alert("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={{ fontFamily: F, background: C.navy, color: C.white, overflowX: "hidden" }}>
@@ -615,10 +640,42 @@ export default function App() {
           </h2>
           <p style={{ fontSize: "clamp(13px, 2.5vw, 16px)", color: C.offWhite, maxWidth: 400, margin: "0 auto 8px", lineHeight: 1.6 }}>Book your $185 first visit. Real service on day one.</p>
           <p style={{ fontSize: 11, color: C.gray, marginBottom: 24 }}>Scheduled within 3–5 business days.</p>
-          <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="#" style={{ padding: "14px 32px", borderRadius: 12, background: C.cyan, color: C.navyDeep, fontSize: "clamp(13px, 3vw, 16px)", fontWeight: 800, fontFamily: F, boxShadow: `0 4px 24px ${C.cyan}33` }}>Book First Visit — $185</a>
-            <a href="tel:+19095550100" style={{ padding: "14px 24px", borderRadius: 12, background: "transparent", color: C.white, border: `1px solid ${C.white}22`, fontSize: "clamp(12px, 2.5vw, 15px)", fontWeight: 600, fontFamily: F }}>📞 Call Us</a>
-          </div>
+          <form onSubmit={handleSubmit} style={{ maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your name"
+              required
+              value={formData.name}
+              onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
+              style={{ padding: "13px 16px", borderRadius: 10, border: `1px solid ${C.cyan}33`, background: `${C.navy}cc`, color: C.white, fontSize: 14, fontFamily: F, outline: "none" }}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email address"
+              required
+              value={formData.email}
+              onChange={e => setFormData(p => ({ ...p, email: e.target.value }))}
+              style={{ padding: "13px 16px", borderRadius: 10, border: `1px solid ${C.cyan}33`, background: `${C.navy}cc`, color: C.white, fontSize: 14, fontFamily: F, outline: "none" }}
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone number (optional)"
+              value={formData.phone}
+              onChange={e => setFormData(p => ({ ...p, phone: e.target.value }))}
+              style={{ padding: "13px 16px", borderRadius: 10, border: `1px solid ${C.cyan}33`, background: `${C.navy}cc`, color: C.white, fontSize: 14, fontFamily: F, outline: "none" }}
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              style={{ padding: "14px 32px", borderRadius: 12, background: submitted ? C.green : C.cyan, color: C.navyDeep, fontSize: "clamp(13px, 3vw, 15px)", fontWeight: 800, fontFamily: F, boxShadow: `0 4px 24px ${C.cyan}33`, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, transition: "all 0.2s" }}
+            >
+              {loading ? "Submitting…" : submitted ? "✓ Submitted! Check your email" : "Book First Visit — $185"}
+            </button>
+            <a href="tel:+19095550100" style={{ padding: "14px 24px", borderRadius: 12, background: "transparent", color: C.white, border: `1px solid ${C.white}22`, fontSize: "clamp(12px, 2.5vw, 15px)", fontWeight: 600, fontFamily: F, textDecoration: "none" }}>📞 Call Us</a>
+          </form>
         </div>
       </section>
 
