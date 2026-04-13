@@ -694,7 +694,7 @@ export default function App() {
               </div>
               <div>
                 <h4 style={{ fontSize: 10, fontWeight: 700, color: C.grayDark, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>Contact</h4>
-                <p style={{ fontSize: 11, color: C.gray, lineHeight: 1.7 }}>📍 San Bernardino, CA<br />📞 (909) 264-6814<br />✉️ hello@fountainmaintenanceinc.com</p>
+                <p style={{ fontSize: 11, color: C.gray, lineHeight: 1.7 }}>📍 San Bernardino, CA<br />📞 (909) 264-6814</p>
               </div>
             </div>
           </div>
