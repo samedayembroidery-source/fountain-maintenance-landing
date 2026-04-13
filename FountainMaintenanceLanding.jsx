@@ -674,7 +674,7 @@ export default function App() {
             >
               {loading ? "Submitting…" : submitted ? "✓ Submitted! Check your email" : "Book First Visit — $185"}
             </button>
-            <a href="tel:+19095550100" style={{ padding: "14px 24px", borderRadius: 12, background: "transparent", color: C.white, border: `1px solid ${C.white}22`, fontSize: "clamp(12px, 2.5vw, 15px)", fontWeight: 600, fontFamily: F, textDecoration: "none" }}>📞 Call Us</a>
+            <a href="tel:+19092646814" style={{ padding: "14px 24px", borderRadius: 12, background: "transparent", color: C.white, border: `1px solid ${C.white}22`, fontSize: "clamp(12px, 2.5vw, 15px)", fontWeight: 600, fontFamily: F, textDecoration: "none" }}>📞 Call Us</a>
           </form>
         </div>
       </section>
@@ -694,7 +694,7 @@ export default function App() {
               </div>
               <div>
                 <h4 style={{ fontSize: 10, fontWeight: 700, color: C.grayDark, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>Contact</h4>
-                <p style={{ fontSize: 11, color: C.gray, lineHeight: 1.7 }}>📍 San Bernardino, CA<br />📞 (909) 555-0100<br />✉️ hello@thefountaindoctor.com</p>
+                <p style={{ fontSize: 11, color: C.gray, lineHeight: 1.7 }}>📍 San Bernardino, CA<br />📞 (909) 264-6814<br />✉️ hello@fountainmaintenanceinc.com</p>
               </div>
             </div>
           </div>
